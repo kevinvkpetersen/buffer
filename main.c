@@ -15,12 +15,12 @@ int main(int argc, char **argv) {
 
 	// Create Producers
 	for(i = 1; i < argc; i++) {
-		buf_insert(b, atoi(argv[i]));
+		buf_insert(&b, atoi(argv[i]));
 	}
 
 	// Create Consumers
 	for(i = 1; i < argc; i++) {
-		buf_remove(b);
+		buf_remove(&b);
 	}
 
 	// Exit

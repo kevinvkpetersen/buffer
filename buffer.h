@@ -13,17 +13,17 @@ struct Buffer {
 	int in, out;
 };
 
-void buf_insert(struct Buffer b, int item) {
+void buf_insert(struct Buffer* b, int item) {
 	// Put 'item' in contents
-	b.contents[b.in] = item;
-	b.in = (b.in + 1) % BUFFER_SIZE;
+	b->contents[b->in] = item;
+	b->in = (b->in + 1) % BUFFER_SIZE;
 	printf("Produced %d.\n", item);
 }
 
-int buf_remove(struct Buffer b) {
+int buf_remove(struct Buffer* b) {
 	// Remove an item from contents
-	int item = b.contents[b.out];
-	b.out = (b.out + 1) % BUFFER_SIZE;
+	int item = b->contents[b->out];
+	b->out = (b->out + 1) % BUFFER_SIZE;
 	printf("Consumed %d.\n", item);
 
 	// Return the removed item
