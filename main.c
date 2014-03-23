@@ -9,10 +9,8 @@ int main(int argc, char **argv) {
 	int i;
 
 	// Initialize buffer
-	struct Buffer b;
-	b.in = 0;
-	b.out = 0;
-
+	buffer b = buf_init();
+	
 	// Create Producers
 	for(i = 1; i < argc; i++) {
 		buf_insert(&b, atoi(argv[i]));
