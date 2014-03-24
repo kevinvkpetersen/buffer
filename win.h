@@ -55,12 +55,14 @@ typedef struct {
 	HANDLE handle;
 } thread;
 
-typedef DWORD WINAPI thread_return;
-
 thread thread_create(LPTHREAD_START_ROUTINE target) {
 	thread t;
 	t.handle = CreateThread(NULL, 0, target, NULL, 0, NULL);
 	return t;
+}
+
+int thread_getID(void) {
+	return GetCurrentThreadId();
 }
 
 void thread_exit(void) {

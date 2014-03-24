@@ -11,8 +11,9 @@
 buffer b;
 int shouldLoop = TRUE;
 
-thread_return producer(void* arg) {
+void producer(void* arg) {
 	buffer_item item;
+	srand(thread_getID());
 
 	while(shouldLoop) {
 		// Insert a random number into the buffer
@@ -25,7 +26,9 @@ thread_return producer(void* arg) {
 	thread_exit();
 }
 
-thread_return consumer(void* arg) {
+void consumer(void* arg) {
+	srand(thread_getID());
+
 	while(shouldLoop) {
 		// Remove the number from the next position in the buffer
 		buf_remove(&b);
