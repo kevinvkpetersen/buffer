@@ -49,3 +49,29 @@ void semaphore_unlock(semaphore* s) {
 void semaphore_destroy(semaphore* s) {
 	CloseHandle(s->handle);
 }
+
+// Generic thread pseudo-class
+typedef struct {
+	HANDLE handle;
+} thread;
+
+typedef DWORD WINAPI thread_return;
+
+thread thread_create(LPTHREAD_START_ROUTINE target) {
+	thread t;
+	t.handle = CreateThread(NULL, 0, target, NULL, 0, NULL);
+	return t;
+}
+
+void thread_exit(void) {
+	ExitThread(0);
+}
+
+void thread_destroy(thread *t) {
+	CloseHandle(t->handle);
+}
+
+// Unix-style sleep function
+void sleep(int sec) {
+	Sleep(sec*1000);
+}

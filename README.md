@@ -21,11 +21,11 @@ In Visual Studio, go to File > New > Project... and select a Visual C++ Empty Pr
 Usage
 ------------
 
-Run from the Command Prompt with some integers. For example, on Windows:
+Run from the Command Prompt with execution time, number of producers and number of consumers. For example, on Windows:
 
     buffer.exe 5 4 3
 
-To get Visual Studio to send command line arguments, right-click on the buffer project and select Properties. Under Configuration Properties > Debugging, click in the second column in the Command Arguments row and enter some integers.
+To get Visual Studio to send command line arguments, right-click on the buffer project and select Properties. Under Configuration Properties > Debugging, click in the second column in the Command Arguments row and enter the execution time, number of producer threads, and number of consumer threads.
 
 Performance
 ------------
