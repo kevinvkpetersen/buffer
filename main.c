@@ -6,14 +6,33 @@
 #include "buffer.h"
 
 #define		MAX_THREADS		20
+#define		MAX_VALUE		100
+
+buffer b;
+int shouldLoop = TRUE;
 
 thread_return producer(void* arg) {
-	printf("P");
+	buffer_item item;
+
+	while(shouldLoop) {
+		// Insert a random number into the buffer
+		item = rand() % MAX_VALUE;
+		buf_insert(&b, item);
+		// Sleep for a random slice of time
+		randSleep();
+	}
+
 	thread_exit();
 }
 
 thread_return consumer(void* arg) {
-	printf("C");
+	while(shouldLoop) {
+		// Remove the number from the next position in the buffer
+		buf_remove(&b);
+		// Sleep for a random slice of time
+		randSleep();
+	}
+
 	thread_exit();
 }
 
@@ -21,7 +40,6 @@ int main(int argc, char **argv) {
 	int execTime, numProd, numCon;
 	thread producers[MAX_THREADS];
 	thread consumers[MAX_THREADS];
-	buffer b;
 	int i;
 
 	if(argc != 4) {
@@ -49,6 +67,9 @@ int main(int argc, char **argv) {
 
 	// Run for the given amount of time
 	sleep(execTime);
+
+	// Tell the threads to exit loops
+	shouldLoop = FALSE;
 
 	// Wait for threads to exit
 	for(i = 0; i < numProd; i++) {

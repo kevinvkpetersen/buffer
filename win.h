@@ -75,3 +75,10 @@ void thread_destroy(thread *t) {
 void sleep(int sec) {
 	Sleep(sec*1000);
 }
+
+// Sleeps for a random interval between 250ms and 500ms
+void randSleep(void) {
+	int time = rand() % 250;
+	time += 250;
+	Sleep(time);
+}
