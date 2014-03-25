@@ -4,11 +4,15 @@
 CC=gcc
 EXECUTABLE=buffer
 SOURCES=main.c buffer.h
+FLAGS=-lpthread
 
 all: clean $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCES)
-	$(CC) $< -o $@
+	$(CC) $< -o $@ $(FLAGS)
+
+test: all
+	./$(EXECUTABLE) 2 3 4
 
 clean:
 	-rm -f $(EXECUTABLE)
