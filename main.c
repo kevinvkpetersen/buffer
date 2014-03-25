@@ -92,6 +92,8 @@ int main(int argc, char **argv) {
 		thread_destroy(&consumers[i]);
 	}
 
+	buf_destroy(&b);
+
 	// Exit
 	return 0;
 }

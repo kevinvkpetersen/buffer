@@ -18,7 +18,7 @@ Windows (Visual Studio):
 
 In Visual Studio, go to File > New > Project... and select a Visual C++ Empty Project. Enter 'buffer' in the Name: field and ensure 'Create directory for solution' is unchecked. Right-click on buffer project, go to Add > Existing Item... and select the project's .c and .h files. To build project, go to Build > Build Solution; buffer.exe will be in Debug folder.
 
-Ubuntu 12.04:
+Ubuntu 12.04 or Mac OS X:
 
 	git clone https://github.com/kevinvkpetersen/buffer.git
 	cd buffer
@@ -31,7 +31,7 @@ Run from the Command Prompt with execution time, number of producers and number 
 
     buffer.exe 5 4 3
 
-Or, on Ubuntu:
+Or, on Ubuntu or Mac:
 
 	./buffer 5 4 3
 

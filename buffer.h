@@ -31,8 +31,8 @@ buffer buf_init(void) {
 	b.out = 0;
 
 	b.mutex = mutex_init();
-	b.empty = semaphore_init(BUFFER_SIZE, BUFFER_SIZE);
-	b.full = semaphore_init(0, BUFFER_SIZE);
+	b.empty = semaphore_init("empty", BUFFER_SIZE, BUFFER_SIZE);
+	b.full = semaphore_init("full", 0, BUFFER_SIZE);
 
 	return b;
 }
@@ -70,4 +70,10 @@ buffer_item buf_remove(buffer* b) {
 
 	// Return the removed item
 	return item;
+}
+
+void buf_destroy(buffer* b) {
+	mutex_destroy(&b->mutex);
+	semaphore_destroy(&b->empty);
+	semaphore_destroy(&b->full);
 }

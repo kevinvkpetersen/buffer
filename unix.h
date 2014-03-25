@@ -4,6 +4,7 @@
 
 #include <pthread.h>
 #include <semaphore.h>
+#include <fcntl.h>
 
 // Generic mutex pseudo-class
 typedef struct {
@@ -29,24 +30,28 @@ void mutex_destroy(mutex* m) {
 
 // Generic semaphore pseudo-class
 typedef struct {
-	sem_t semaphore;
+	sem_t* semaphore;
+	char* name;
 } semaphore;
 
-semaphore semaphore_init(int init, int max) {
+semaphore semaphore_init(char*name, int init, int max) {
 	semaphore s;
-	sem_init(&s.semaphore, 0, init);
+	s.name = name;
+	s.semaphore = sem_open(name, O_CREAT, S_IRUSR | S_IWUSR, init);
 	return s;
 }
 
 void semaphore_lock(semaphore* s) {
-	sem_wait(&s->semaphore);
+	sem_wait(s->semaphore);
 }
 
 void semaphore_unlock(semaphore* s) {
-	sem_post(&s->semaphore);
+	sem_post(s->semaphore);
 }
 
 void semaphore_destroy(semaphore* s) {
+	sem_close(s->semaphore);
+	sem_unlink(s->name);
 }
 
 // Generic thread pseudo-class

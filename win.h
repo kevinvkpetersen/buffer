@@ -32,7 +32,7 @@ typedef struct {
 	HANDLE handle;
 } semaphore;
 
-semaphore semaphore_init(int init, int max) {
+semaphore semaphore_init(char* name, int init, int max) {
 	semaphore s;
 	s.handle = CreateSemaphore(NULL, init, max, NULL);
 	return s;
