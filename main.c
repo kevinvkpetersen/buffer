@@ -77,6 +77,12 @@ int main(int argc, char **argv) {
 	// Tell the threads to exit loops
 	shouldLoop = FALSE;
 
+	// Ensure that each thread can exit
+	for(i = 0; (i < numProd) || (i < numCon); i++) {
+		semaphore_unlock(&b.empty);
+		semaphore_unlock(&b.full);
+	}
+
 	// Wait for threads to exit
 	for(i = 0; i < numProd; i++) {
 		thread_destroy(&producers[i]);
