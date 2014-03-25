@@ -69,7 +69,7 @@ void thread_exit(void) {
 	ExitThread(0);
 }
 
-void thread_destroy(thread *t) {
+void thread_destroy(thread* t) {
 	CloseHandle(t->handle);
 }
 

@@ -51,26 +51,31 @@ void semaphore_destroy(semaphore* s) {
 
 // Generic thread pseudo-class
 typedef struct {
-
+	pthread_t thread;
 } thread;
 
 typedef void* LPTHREAD_START_ROUTINE;
 
 thread thread_create(LPTHREAD_START_ROUTINE target) {
+	pthread_attr_t attr;
 	thread t;
+
+	pthread_attr_init(&attr);
+	pthread_create(&t.thread, &attr, target, NULL);
+
 	return t;
 }
 
 int thread_getID(void) {
-	return 0;
+	return pthread_self();
 }
 
 void thread_exit(void) {
-
+	pthread_exit(NULL);
 }
 
-void thread_destroy(thread *t) {
-
+void thread_destroy(thread* t) {
+	pthread_join(t->thread, NULL);
 }
 
 // Sleeps for a random interval between 250ms and 500ms
