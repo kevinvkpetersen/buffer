@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include "buffer.h"
 
+#define		TRUE			1
+#define		FALSE			0
+
 #define		MAX_THREADS		20
 #define		MAX_VALUE		100
 

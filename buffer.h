@@ -3,7 +3,12 @@
  */
 
 #include <stdio.h>
-#include "win.h"
+
+#ifdef _WIN32
+	#include "win.h"
+#else
+	#include "unix.h"
+#endif
 
 #define		BUFFER_SIZE		8
 typedef		int				buffer_item;

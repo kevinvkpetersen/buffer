@@ -29,3 +29,8 @@ ipch
 *.suo
 *.vcxproj
 *.vcxproj.*
+
+# Eclipse
+*.cproject
+*.project
+buffer
